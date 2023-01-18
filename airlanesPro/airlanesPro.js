@@ -1,22 +1,24 @@
 const flights = [
-  { id: 00, to: "New York", from: "Barcelona", cost: 700, scale: false },
-  { id: 01, to: "Los Angeles", from: "Madrid", cost: 1100, scale: true },
-  { id: 02, to: "Paris", from: "Barcelona", cost: 210, scale: false },
-  { id: 03, to: "Roma", from: "Barcelona", cost: 150, scale: false },
-  { id: 04, to: "London", from: "Madrid", cost: 200, scale: false },
-  { id: 05, to: "Madrid", from: "Barcelona", cost: 90, scale: false },
-  { id: 06, to: "Tokyo", from: "Madrid", cost: 1500, scale: true },
-  { id: 07, to: "Shangai", from: "Barcelona", cost: 800, scale: true },
-  { id: 08, to: "Sydney", from: "Barcelona", cost: 150, scale: true },
-  { id: 09, to: "Tel-Aviv", from: "Madrid", cost: 150, scale: false },
+  { id: 1, to: "New York", from: "Barcelona", cost: 700, scale: false },
+  { id: 2, to: "Los Angeles", from: "Madrid", cost: 1100, scale: true },
+  { id: 3, to: "Paris", from: "Barcelona", cost: 210, scale: false },
+  { id: 4, to: "Roma", from: "Barcelona", cost: 150, scale: false },
+  { id: 5, to: "London", from: "Madrid", cost: 200, scale: false },
+  { id: 6, to: "Madrid", from: "Barcelona", cost: 90, scale: false },
+  { id: 7, to: "Tokyo", from: "Madrid", cost: 1500, scale: true },
+  { id: 8, to: "Shangai", from: "Barcelona", cost: 800, scale: true },
+  { id: 9, to: "Sydney", from: "Barcelona", cost: 150, scale: true },
+  { id: 10, to: "Tel-Aviv", from: "Madrid", cost: 150, scale: false },
 ];
 const greetUser = () => {
-  let userName = prompt("Hello introduce username");
+  const userName = prompt("Hello introduce username");
   if (userName === null) {
     return;
   }
+
   if (userName === "") {
     alert("log in again");
+
     greetUser();
   } else {
     console.log(`Welcome board ${userName}!`);
@@ -43,6 +45,7 @@ const averageCost = () => {
   for (let i = 0; i < flights.length; i++) {
     totalPrice += flights[i].cost;
   }
+
   const averagePrice = totalPrice / flights.length;
   console.log(`The average price of a flight is ${averagePrice}€.`);
 };
@@ -52,7 +55,6 @@ const stopOverFlights = () => {
 
   flights.forEach((cheek) => {
     if (cheek.scale === "has no scale.") {
-      return;
     } else {
       stopOvers.push(flights.scale);
     }
@@ -80,7 +82,7 @@ const createFlight = () => {
     newFlight.from === "" ||
     newFlight.from === null
   );
-  do newFlight.cost = +prompt("COST");
+  do newFlight.cost = Number(prompt("COST"));
   while (
     isNaN(newFlight.cost) ||
     newFlight.cost === 0 ||
@@ -99,7 +101,6 @@ const deleteFlight = () => {
 const askForAction = () => {
   const action = prompt("Do you want to CREATE or DELETE");
   if (action === null) {
-    return;
   } else if (
     action.toUpperCase() !== "CREATE" &&
     action.toUpperCase() !== "DELETE"
@@ -112,7 +113,7 @@ const askForAction = () => {
 };
 
 const adminActions = () => {
-  let adminActionResult = askForAction();
+  const adminActionResult = askForAction();
   let keepAdding;
   let keepDeleting;
   if (adminActionResult === "CREATE") {
@@ -122,10 +123,12 @@ const adminActions = () => {
         alert("You can not create more flights");
         return;
       }
+
       createFlight();
       keepAdding = confirm("Do you want to create another?");
     } while (keepAdding === true);
   }
+
   if (adminActionResult === "DELETE") {
     do {
       if (flights.length === 0) {
@@ -133,6 +136,7 @@ const adminActions = () => {
         alert("all flights deleted");
         return;
       }
+
       deleteFlight();
       keepDeleting = confirm("Do you want a delete another?");
     } while (keepDeleting === true);
@@ -140,9 +144,9 @@ const adminActions = () => {
 };
 
 const userActions = () => {
-  let maxPrice = +prompt("Introduce Maxprice");
+  const maxPrice = Number(prompt("Introduce Maxprice"));
 
-  let cheaperFlights = [];
+  const cheaperFlights = [];
 
   console.log("You cheaper flights are:");
   flights.map((flight) => {
@@ -157,7 +161,6 @@ const userActions = () => {
 const cheekCredentials = () => {
   const userOrAdmin = prompt("Are you ADMIN/USER?");
   if (userOrAdmin === null) {
-    return;
   } else if (
     userOrAdmin.toUpperCase() !== "ADMIN" &&
     userOrAdmin.toUpperCase() !== "USER"
@@ -182,4 +185,5 @@ const playApp = () => {
     aviableFlights();
   }
 };
+
 playApp();
